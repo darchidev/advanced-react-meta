@@ -8,7 +8,6 @@ import {
 	faStackOverflow,
 } from "@fortawesome/free-brands-svg-icons";
 import { Box, HStack } from "@chakra-ui/react";
-import useScrollListener from "../hooks/useScroll";
 
 const socials = [
 	{
@@ -34,6 +33,7 @@ const socials = [
 ];
 
 const Header = () => {
+	/*
 	const [direction, setDirection] = useState("");
 	const scroll = useScrollListener();
 
@@ -56,6 +56,34 @@ const Header = () => {
 			transform: "translateY(-200%)",
 		},
 	};
+*/
+	const headerRef = useRef(null);
+	useEffect(() => {
+		let initialPosition = window.scrollY;
+
+		const scrollHandler = () => {
+			const currentPosition = window.scrollY;
+			const getHeaderEl = headerRef.current;
+
+			if (!getHeaderEl) {
+				return;
+			}
+
+			if (initialPosition > currentPosition) {
+				getHeaderEl.style.transform = "translateY(0)";
+			} else {
+				getHeaderEl.style.transform = "translateY(-200px)";
+			}
+
+			initialPosition = currentPosition;
+		};
+
+		window.addEventListener("scroll", scrollHandler);
+
+		return () => {
+			window.removeEventListener("scroll", scrollHandler);
+		};
+	}, []);
 
 	const handleClick = (anchor) => () => {
 		const id = `${anchor}-section`;
@@ -79,7 +107,7 @@ const Header = () => {
 			transitionDuration=".3s"
 			transitionTimingFunction="ease-in-out"
 			backgroundColor="#18181b"
-			style={direction === "up" ? navbar.active : navbar.hidden}
+			ref={headerRef}
 			zIndex={50}
 		>
 			<Box color="white" maxWidth="1280px" margin="0 auto">
@@ -102,7 +130,7 @@ const Header = () => {
 					</nav>
 					<nav>
 						<HStack spacing={8}>
-							<a href="/#contact-me" onClick={handleClick("contactme")}>
+							<a href="/#contactme" onClick={handleClick("contactme")}>
 								Contact Me
 							</a>
 							<a href="/#projects" onClick={handleClick("projects")}>
