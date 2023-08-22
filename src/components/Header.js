@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -33,30 +33,6 @@ const socials = [
 ];
 
 const Header = () => {
-	/*
-	const [direction, setDirection] = useState("");
-	const scroll = useScrollListener();
-
-	useEffect(
-		() =>
-			scroll.y > 150 && scroll.y - scroll.lastY > 0
-				? setDirection("down")
-				: setDirection("up"),
-		[scroll.y, scroll.lastY]
-	);
-
-	const navbar = {
-		active: {
-			visibility: "visible",
-			transition: "all 0.5s",
-		},
-		hidden: {
-			visibility: "hidden",
-			transition: "all 0.5s",
-			transform: "translateY(-200%)",
-		},
-	};
-*/
 	const headerRef = useRef(null);
 	useEffect(() => {
 		let initialPosition = window.scrollY;

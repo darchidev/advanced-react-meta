@@ -9,6 +9,7 @@ import {
 	Heading,
 	Input,
 	Select,
+	Spinner,
 	Textarea,
 	VStack,
 } from "@chakra-ui/react";
@@ -111,7 +112,7 @@ const LandingSection = () => {
 								<FormErrorMessage>{formik.errors.comment}</FormErrorMessage>
 							</FormControl>
 							<Button type="submit" colorScheme="purple" width="full">
-								Submit
+								{isLoading ? <Spinner size="md" /> : "Submit"}
 							</Button>
 						</VStack>
 					</form>
